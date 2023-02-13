@@ -13,7 +13,7 @@ class MySpider(scrapy.Spider):
         options = Options() 
         options.headless = True
         options.page_load_strategy = 'eager'
-        #options.add_argument("--headless=new") #to do: not sure if it's necessary
+        #options.add_argument("--headless=new") #to do: not sure if it's necessary, it works without it
         self.driver = webdriver.Chrome(options=options)
         
     def parse(self, response):
@@ -25,4 +25,10 @@ class MySpider(scrapy.Spider):
         sel = Selector(text=self.driver.page_source)
         links = sel.css('a.WxyYeI15LZ5U_DOM0z8F::attr(href)').getall() #css picker for companies urls 
         print(links)
+        with open('urls.txt', 'a') as f:
+            for link in links:
+                f.write("https://www.ycombinator.com" +link + '/jobs\n')
+
+    def closed(self, reason):
+        self.driver.quit()
             
