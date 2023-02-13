@@ -24,7 +24,7 @@ class MySpider(scrapy.Spider):
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         sel = Selector(text=self.driver.page_source)
         links = sel.css('a.WxyYeI15LZ5U_DOM0z8F::attr(href)').getall() #css picker for companies urls 
-        print(links)
+        #print(links)
         with open('urls.txt', 'a') as f:
             for link in links:
                 f.write("https://www.ycombinator.com" +link + '/jobs\n')
