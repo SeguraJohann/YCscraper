@@ -13,3 +13,6 @@ class JobSpider(scrapy.Spider):
         print(urls)
 
     def parse(self, response):
+        jobElements = response.xpath('//div[@class="flex w-full flex-row justify-between py-4"]')
+        for job in jobElements:
+            print (job)
