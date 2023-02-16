@@ -15,7 +15,6 @@ class JobSpider(scrapy.Spider):
     def parse(self, response):
         jobElements = response.xpath('//div[@class="flex w-full flex-row justify-between py-4"]')
         for job in jobElements: 
-            #if "Any (new grads ok)" in jobElements.extract():
             jobUrl = jobElements.xpath('.//a/@href').get()
             with open('new_grad_jobs.txt', 'a') as f:
                 print("https://www.ycombinator.com" + jobUrl + '\n')
